@@ -71,6 +71,7 @@ process DEMULTIPLEX_FASTQ {
 process CONCATENATE_FASTQ {
     label 'small_job'
     tag "${meta.sample_name}"
+    container "community.wave.seqera.io/library/seqtk_pigz:aa99a20f06d8e9a8"
     debug false
 
     input:
