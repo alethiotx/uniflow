@@ -58,18 +58,24 @@ process PREPARE_MULTIQC_REPORT {
 }
 
 process BUNDLE_QC_REPORT {
+    container "community.wave.seqera.io/library/seqtk_pigz:aa99a20f06d8e9a8"
+
     input:
     tuple path(experiment_metrics_csv),
           path(aggregated_params),
           path(aggregated_multiqc_report)
 
+    // [sample_name, modality, filename] per plot, in the same order as qc_plots
     val qc_entries
+    path qc_plots, stageAs: "qc_plots/?/*"
 
     output:
     path "qc_report.tar.gz", emit: tarball
 
     script:
-    def copyCommands = qc_entries.collect { sample_name, modality, filename, plot ->
+    def staged_plots = qc_plots instanceof List ? qc_plots : [qc_plots]
+    def copyCommands = [qc_entries, staged_plots].transpose().collect { entry, plot ->
+        def (sample_name, modality, filename) = entry
         """
         mkdir -p plots/${sample_name}/${modality}
         cp -L "${plot}" "plots/${sample_name}/${modality}/${filename}"

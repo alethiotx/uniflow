@@ -61,7 +61,8 @@ workflow EXPERIMENT {
             )
         }
         .collect(flat: false)
-    BUNDLE_QC_REPORT(qc_tarball_ch, qc_bundle_input)
+        .map { entries -> [entries.collect { it[0..2] }, entries.collect { it[3] }] }
+    BUNDLE_QC_REPORT(qc_tarball_ch, qc_bundle_input.map { it[0] }, qc_bundle_input.map { it[1] })
 
     emit:
     report                 = GENERATE_MULTIQC_REPORT.out.report
