@@ -64,11 +64,11 @@ Example:
 FASTQ files must be gzip-compressed and named in the following format (Illumina standard naming convention):
 
 ```text
-<library_id>_L00X_R1_001.fastq.gz
-<library_id>_L00X_R2_001.fastq.gz
+<library_id>[_L00X]_R1_001.fastq.gz
+<library_id>[_L00X]_R2_001.fastq.gz
 ```
 
-The R1 and R2 files in each row must have the same library ID and lane.
+The lane (`_L00X`) is optional. The R1 and R2 files in each row must have the same library ID and lane.
 
 ### Optional columns
 

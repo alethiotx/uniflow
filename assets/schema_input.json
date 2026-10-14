@@ -17,14 +17,14 @@
             },
             "fastq_1": {
                 "type": "string",
-                "pattern": "^(?:.*)\\/[\\w-]+_L\\d+_R1_001\\.fastq\\.gz$",
+                "pattern": "^(?:.*)\\/[\\w-]+(?:_L\\d+)?_R1_001\\.fastq\\.gz$",
                 "format": "file-path",
                 "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fastq.gz'",
                 "exists": true
             },
             "fastq_2": {
                 "type": "string",
-                "pattern": "^(?:.*)\\/[\\w-]+_L\\d+_R2_001\\.fastq\\.gz$",
+                "pattern": "^(?:.*)\\/[\\w-]+(?:_L\\d+)?_R2_001\\.fastq\\.gz$",
                 "format": "file-path",
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fastq.gz'",
                 "exists": true
